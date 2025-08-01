@@ -49,8 +49,6 @@ export default function App(){
       // Send POST request to API to add product
       const res = await axios.post(API, productToSend);
 
-      // If product is successfully created, update products list and reset form
-      if (res.status === 201 && res.data && res.data._id) {
         setProducts(prev => [...prev, res.data]);
         setForm({
           name: '',
@@ -59,9 +57,6 @@ export default function App(){
           category: '',
           inStock: true,
         });
-      } else {
-        setError('The product was not saved correctly.'); // Set error if response is not as expected
-      }
     } catch (error) {
       console.error(error.response?.data || error.message); // Log error details
       setError('Failed to add product'); // Set error message
@@ -72,7 +67,7 @@ export default function App(){
 
   // Render the UI
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md">
+    <div className="max-w-2xl mx-auto p-6 bg-gray-500 rounded-lg shadow-md">
       <h1 className="text-3xl font-bold text-gray-800 mb-6">Product Manager</h1>
       
       {/* Display error message if any */}
